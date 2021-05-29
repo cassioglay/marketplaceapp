@@ -12,7 +12,7 @@ const App = () => {
 
 		<>
 			<View style={styles.container}>
-				<Text style={styles.text}>Hello</Text>
+				<Text style={styles.text}>Catalog</Text>
 			</View>
 		</>
 	);
