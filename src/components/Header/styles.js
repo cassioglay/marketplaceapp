@@ -7,7 +7,8 @@ export const Container = styled.View`
     padding-top: 10px;
 `;
 
-export const Label = styled.Text`
+export const Title = styled.Text`
     color: #FFF;
-    font-size: 35px;
+    font-size: 25px;
+    font-weight: bold;
 `;

@@ -1,13 +1,11 @@
 import React from 'react';
 
-import { Container, Label } from './styles';
-
-
+import { Container, Title } from './styles';
 
 const Header = () => {
     return (
         <Container>
-            <Label>MarketPlace</Label>
+            <Title>MarketPlace</Title>
         </Container>
     )
 }
