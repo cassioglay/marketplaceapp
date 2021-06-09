@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View} from 'react-native';
+import { Text, View} from 'react-native';
 
 import {
 	Container,
@@ -17,36 +17,52 @@ import {
 
 export default function App() {
 
-	const [products, setProducts] = useState([{
-		id:'1',
-		title: 'Assinatuira Trimestral',
-		image_url: '',
-		price:150
-	}]);
+	const [products, setProducts] = useState([
+		{
+			"id": "1",
+			"title": "Assinatura Trimestral",
+			"image_url":
+			  "https://res.cloudinary.com/robertosousa1/image/upload/v1594492578/dio/quarterly_subscription_yjolpc.png",
+			"price": 150
+		},
+		{
+			"id": "2",
+			"title": "Assinatura Trimestral",
+			"image_url":
+			  "https://res.cloudinary.com/robertosousa1/image/upload/v1594492578/dio/quarterly_subscription_yjolpc.png",
+			"price": 150
+		},
+		{
+			"id": "3",
+			"title": "Assinatura Trimestral",
+			"image_url":
+			  "https://res.cloudinary.com/robertosousa1/image/upload/v1594492578/dio/quarterly_subscription_yjolpc.png",
+			"price": 150
+		}
+	]);
 
 	return (
 
 		<Container>
 			<ProductContainer>
-				<ProductList
+		 		<ProductList
 					data={products}
 					keyExtractor={(item) => item.id}
-					ListFooterComponent={<View/>}
 					ListFooterComponentStyle={{
-						height:80
-					}}
-					renderItem={({item}) => {
-						<Product>
-							<ProductImage source={{}}/>
-							<ProductTitle>{item.title}</ProductTitle>
-							<PriceContainer>
-								<ProductPrice>{item.price}</ProductPrice>
-								<ProductButton onPress={()=>{}}>
-									<ProductButtonText>Adicionar</ProductButtonText>
-								</ProductButton>
-							</PriceContainer>
-						</Product>
-					}}
+                        height:100
+                    }}
+					renderItem={({item}) => 
+					<Product>
+                            <ProductImage source={{ uri: item.image_url}}/>
+                            <ProductTitle>{item.title}</ProductTitle>
+                            <PriceContainer>
+                                <ProductPrice>{item.price}</ProductPrice>
+                                <ProductButton onPress={()=>{}}>
+                                    <ProductButtonText>Adicionar</ProductButtonText>
+                                </ProductButton>
+                            </PriceContainer>
+                        </Product>
+					}
 				/>
 			</ProductContainer>
 		</Container>

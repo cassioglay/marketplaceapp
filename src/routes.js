@@ -17,6 +17,7 @@ export default function Routes(){
                     cardStyle: {backgroundColor: '#313746'}
 
                 }}
+                initialRouteName="Catalog"
             >
                 <Stack.Screen
                     name="Catalog"
