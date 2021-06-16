@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import FloatingCart from '../../components/FloatingCart';
 
-
 import formatValue from '../../utils/formatValue';
 
 import {
