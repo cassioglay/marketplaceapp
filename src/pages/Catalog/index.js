@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import FeatherIcon from 'react-native-vector-icons/Feather';
+import FloatingCart from '../../components/FloatingCart';
+
 
 import formatValue from '../../utils/formatValue';
 
@@ -61,13 +63,14 @@ export default function App() {
 								<ProductPrice>{formatValue(item.price)}</ProductPrice>
 								<ProductButton onPress={() => { }}>
 									<ProductButtonText>Adicionar</ProductButtonText>
-									<FeatherIcon size={30} name="plus-circle" color="#d1d7e9"/>
+									<FeatherIcon size={30} name="plus-circle" color="#d1d7e9" />
 								</ProductButton>
 							</PriceContainer>
 						</Product>
 					}
 				/>
 			</ProductContainer>
+			<FloatingCart />
 		</Container>
 	)
 };
