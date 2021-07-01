@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { View } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 
 import formatValue from '../../utils/formatValue';
+
+import EmptyCart from '../../components/EmptyCart';
 
 import {
 
@@ -27,24 +29,25 @@ import {
 
 export default function Cart() {
 
-    const [products, setProducts] = useState([
-        {
-            "id": "1",
-            "title": "Assinatura Trimestral",
-            "image_url":
-                "https://res.cloudinary.com/robertosousa1/image/upload/v1594492578/dio/quarterly_subscription_yjolpc.png",
-            "quantity": 3,
-            "price": 150
-        },
-        {
-            "id": "2",
-            "title": "Assinatura Trimestral",
-            "image_url":
-                "https://res.cloudinary.com/robertosousa1/image/upload/v1594492578/dio/quarterly_subscription_yjolpc.png",
-            "quantity": 1,
-            "price": 150
-        }
-    ]);
+    const [products, setProducts] = useState([]);
+
+    const cartSize = useMemo(() => {
+
+        return products.length || 0;
+
+    }, [products]);
+
+    const cartTotal = useMemo(() => {
+
+        const cartAmount = products.reduce((accumulate, product) => {
+            const totalPrice = accumulate + (product.price * product.quantity);
+
+            return totalPrice;
+
+        }, 0);
+
+        return formatValue(cartAmount);
+    }, [products])
 
     return (
         <Container>
@@ -56,15 +59,16 @@ export default function Cart() {
                     ListFooterComponentStyle={{
                         height: 80
                     }}
+                    ListEmptyComponent={<EmptyCart/>}
                     renderItem={({ item }) => (
                         <Product>
                             <ProductImage source={{ uri: item.image_url }} />
                             <ProductTitleContainer>
                                 <ProductTitle>{item.title}</ProductTitle>
-                                    <ProductPriceContainer>
-                                        <ProductSinglePrice>
-                                            {formatValue(item.price)}
-                                        </ProductSinglePrice>
+                                <ProductPriceContainer>
+                                    <ProductSinglePrice>
+                                        {formatValue(item.price)}
+                                    </ProductSinglePrice>
 
                                     <TotalContainer>
                                         <ProductQuantity>{item.quantity} x </ProductQuantity>
@@ -74,21 +78,25 @@ export default function Cart() {
                                         </ProductPrice>
 
                                     </TotalContainer>
-                                </ProductPriceContainer>        
+                                </ProductPriceContainer>
                             </ProductTitleContainer>
                             <ActionContainer>
                                 <ActionButton>
-                                    <FeatherIcon name="plus" color="#E83F5B" size={16}/>
+                                    <FeatherIcon name="plus" color="#E83F5B" size={16} />
                                 </ActionButton>
                                 <ActionButton>
-                                    <FeatherIcon name="minus" color="#E83F5B" size={16}/>
+                                    <FeatherIcon name="minus" color="#E83F5B" size={16} />
                                 </ActionButton>
                             </ActionContainer>
                         </Product>
                     )}
                 />
-
             </ProductContainer>
+            <TotalProducsContainer>
+                <FeatherIcon name="shopping-cart" color="#fff" size={24} />
+                <TotalProductText> {cartSize} {cartSize === 1 ? 'item' : 'itens'} </TotalProductText>
+                <SubTotalValue> {cartTotal} </SubTotalValue>
+            </TotalProducsContainer>
         </Container>
     )
 }
