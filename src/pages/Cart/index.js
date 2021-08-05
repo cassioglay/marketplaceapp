@@ -1,5 +1,8 @@
 import React, { useState, useMemo } from 'react';
 import { View } from 'react-native';
+
+import { useDispatch, useSelector } from 'react-redux';
+
 import FeatherIcon from 'react-native-vector-icons/Feather';
 
 import formatValue from '../../utils/formatValue';
@@ -7,7 +10,6 @@ import formatValue from '../../utils/formatValue';
 import EmptyCart from '../../components/EmptyCart';
 
 import {
-
     Container,
     ProductContainer,
     ProductList,
@@ -29,7 +31,9 @@ import {
 
 export default function Cart() {
 
-    const [products, setProducts] = useState([]);
+    const dispatch = useDispatch();
+
+    const products = useSelector(({cart}) => cart);
 
     const cartSize = useMemo(() => {
 
@@ -40,7 +44,7 @@ export default function Cart() {
     const cartTotal = useMemo(() => {
 
         const cartAmount = products.reduce((accumulate, product) => {
-            const totalPrice = accumulate + (product.price * product.quantity);
+            const totalPrice = accumulate + (product.price * product.amount);
 
             return totalPrice;
 
@@ -71,10 +75,10 @@ export default function Cart() {
                                     </ProductSinglePrice>
 
                                     <TotalContainer>
-                                        <ProductQuantity>{item.quantity} x </ProductQuantity>
+                                        <ProductQuantity>{item.amount} x </ProductQuantity>
 
                                         <ProductPrice>
-                                            {formatValue(item.price * item.quantity)}
+                                            {formatValue(item.price * item.amount)}
                                         </ProductPrice>
 
                                     </TotalContainer>
