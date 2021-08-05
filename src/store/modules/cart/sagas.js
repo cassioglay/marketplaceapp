@@ -1,4 +1,4 @@
-import { all, takeLatest, select, call, put } from 'redux-saga/effects';
+import { all, put, select, call, takeLatest } from 'redux-saga/effects';
 
 import api from '../../../services/api';
 import formatValue from '../../../utils/formatValue';
@@ -25,7 +25,6 @@ function* addToCart({ id }) {
         yield put(addToCartSuccess(data));
 
     }
-
 };
 
 export default all([takeLatest('@cart/ADD_REQUEST', addToCart)])
