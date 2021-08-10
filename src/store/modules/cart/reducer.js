@@ -9,15 +9,15 @@ export default function cart(state = [], action) {
             });
         case '@cart/REMOVE':
             return produce(state, (draft) => {
-                const producIndex = draft.findIndex((p) => p.id === action.id);
+                const producIndex = draft.findIndex((p) => p.id == action.id);
                 
-                if(producIndex > 0) draft.splice(producIndex, 1)
+                if(producIndex >= 0) draft.splice(producIndex, 1)
             });
         case '@cart/UPDATE_AMOUNT_SUCCESS':
             return produce(state, (draft) => {
-                const producIndex = draft.findIndex((p) => p.id === action.id);
+                const producIndex = draft.findIndex((p) => p.id == action.id);
 
-                if(producIndex > 0){
+                if(producIndex >= 0){
                     draft[producIndex].amount = Number(action.amount)
                 }
             });
